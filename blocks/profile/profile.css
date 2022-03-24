@@ -1,6 +1,6 @@
 .profile {
-  max-width: 880px;
-  margin: 0 auto;
+  /* max-width: 880px;
+  margin: 0 auto; */
   padding-top: 40px;
   display: flex;
   justify-content: space-between;
@@ -47,6 +47,8 @@
   background: url(../../images/edit_button.svg);
   border: none;
   align-self: center;
+  cursor: pointer;
+  transition: opacity 0.5s;
 }
 
 .profile__add-button {
@@ -54,5 +56,15 @@
   width: 150px;
   height: 50px;
   border: none;
+  cursor: pointer;
+  transition: opacity 0.5s;
   /* align-self: center; */
+}
+
+.profile__edit-button:hover {
+  opacity: 0.6;
+}
+
+.profile__add-button:hover {
+  opacity: 0.6;
 }
