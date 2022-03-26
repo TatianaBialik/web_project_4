@@ -44,6 +44,10 @@
   opacity: 0.5;
 }
 
+.card__like_active {
+  background: url(../../images/like_active_button.svg);
+}
+
 @media screen and (max-width: 1100px) {
   .card__picture {
     width: 100%;
