@@ -1,14 +1,17 @@
+.card {
+  height: 100%;
+  /* object-fit: fill; */
+}
+
 .card__picture {
   border-radius: 10px 10px 0 0;
   display: block;
+  /* object-fit: cover; */
 }
 
 .card__caption {
   max-width: 100%;
   padding: 25px 15px 31px 21px;
-  color: #000;
-  font-weight: 900;
-  font-size: 24px;
   background-color: #fff;
   border-radius: 0 0 10px 10px;
   display: flex;
@@ -19,6 +22,9 @@
 
 .card__description {
   margin: 0;
+  color: #000;
+  font-weight: 900;
+  font-size: 24px;
   max-width: 225px;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -36,4 +42,12 @@
 
 .card__like:hover {
   opacity: 0.5;
+}
+
+@media screen and (max-width: 1100px) {
+  .card__picture {
+    width: 100%;
+    /* max-height: 100%; */
+  }
+  
 }
