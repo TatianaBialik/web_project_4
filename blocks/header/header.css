@@ -17,9 +17,16 @@
   
 } */
 
-@media screen and (max-width: 780px){
+@media screen and (min-width:526px) and (max-width:780px) {
+  .header {
+    padding: 0 100px;
+  }
+}
+
+@media screen and (max-width: 525px){
   .header__logo {
     padding: 0 19px;
+    max-width: 126px;
   }
 
   .header__underline {
