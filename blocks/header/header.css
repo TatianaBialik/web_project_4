@@ -10,13 +10,6 @@
   opacity: 0.7;
 }
 
-/* @media screen and (min-width: 526px) and (max-width: 780px) {
-  .header {
-    max-width: 700px;
-  }
-  
-} */
-
 @media screen and (min-width:526px) and (max-width:780px) {
   .header {
     padding: 0 100px;
