@@ -4,8 +4,6 @@
   background-color: #000;
   color: #fff;
   position: relative;
-  /* display: flex; */
-  /* flex-direction: column; */
 }
 
 @media screen and (max-width: 1100px) {
@@ -13,11 +11,6 @@
     padding: 45px 100px 60px;
   }
 }
-
-/* @media screen and (min-width: 526px) and (max-width: 780px) {
-  padding: ;
-  
-} */
 
 @media screen and (max-width: 780px){
   .page {

@@ -1,6 +1,4 @@
 .profile {
-  /* max-width: 880px;
-  margin: 0 auto; */
   padding-top: 40px;
   display: flex;
   justify-content: space-between;
@@ -24,8 +22,6 @@
     "about about";
   column-gap: 18px;
   row-gap: 16px;
-  /* align-items: flex-end; */
-
 }
 
 .profile__name {
@@ -49,8 +45,6 @@
   grid-area: button;
   background: url('../../images/edit_button.svg');
   background-size: contain;
-  /* background-color: gray; */
-  /* background: transparent; */
   width: 24px;
   height: 24px;
   border: none;
@@ -58,28 +52,17 @@
   cursor: pointer;
   transition: opacity 0.5s;
   padding: 0;
-  /* position: relative; */
 }
-
-/* .profile__edit-picture {
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-} */
 
 .profile__add-button {
   background: url(../../images/add_button.svg);
   background-repeat: no-repeat;
   background-size: contain;
-  /* background-repeat: no-repeat; */
-  /* background-color: gray; */
   width: 150px;
   height: 50px;
   border: none;
   cursor: pointer;
   transition: opacity 0.5s;
-  /* align-self: center; */
 }
 
 .profile__add-picture {
@@ -106,16 +89,7 @@
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
-    
-    /* height: 100px; */
-    /* background-size: 100% 100%; */
   }
-
-  /* .profile__add-picture {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }*/
 } 
 
 @media screen and (max-width: 780px) {

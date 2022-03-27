@@ -1,16 +1,29 @@
 # Project 4: Around The U.S.
 
-### Overview
+## Overview
 
+* Intro
 * Figma
-* Images
+* Technologies
+* GitHub Pages
 
-**Figma**
+### Intro
+
+This is the photo gallery. You can change user name and info, put likes on photo.
+
+### Figma
 
 * [Link to the project in Figma](https://www.figma.com/file/SurN1jaeEQIhuZEDMhmWWf/Sprint-4-Around-The-U.S.-desktop-mobile?node-id=0%3A1)
 
-**Images**
+### Technologies
 
-The way you'll do this at work is by exporting images directly from Figma — we recommend doing that to practice more. Don't forget to optimize them [here](https://tinypng.com/), so your project loads faster. 
+* Semantic HTML5
+* Flat BEM
+* Media Queries
+* Grid Layout
+* Flexbox
+* Vanilla JavaScript
 
-Have fun with JavaScript!
+### GitHub Pages
+
+[Link to the project on GitHub Pages](https://tatianabialik.github.io/web_project_4/)
