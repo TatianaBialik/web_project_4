@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta author="Tatiana Bialik">
   <title>Around the U.S.</title>
   <link rel="stylesheet" href="pages/index.css">
 </head>
@@ -13,89 +14,92 @@
 
     <header class="header">
       <img src="images/logo.svg" alt="Around the U.S. inscription" class="header__logo">
-      <hr class="header__underline">
+      <hr class="header__underline" />
     </header>
 
     <main class="main">
       <section class="profile">
         <div class="profile__user">
-          <img src="images/avatar.png" alt="Round photo of old man wore a red hat and glasses" class="avatar">
+          <img 
+          src="images/avatar.png" 
+          alt="Round photo of old man wore a red hat and glasses" 
+          class="avatar" />
           <div class="profile__info">
             <h1 class="profile__name">Jacques Cousteau</h1>
             <p class="profile__about">Explorer</p>
-            <button class="profile__edit-button">
+            <button type="button" class="profile__edit-button">
             </button>
           </div>
         </div>
-        <button class="profile__add-button">
+        <button type="button" class="profile__add-button">
         </button>
       </section>
 
       <section class="gallery">
 
         <div class="card">
-          <img src="images/image_1.jpg" 
-               alt="A river with forest on the banks, mountains in the background" 
-               class="card__picture">
+          <img 
+          src="images/image_1.jpg" 
+          alt="A river with forest on the banks, mountains in the background" 
+          class="card__picture" />
           <div class="card__caption">
             <p class="card__description">Yosemite Valley</p>
-            <button class="card__like">
-            </button>
+            <button type="button" class="card__like"></button>
           </div>
         </div>
 
         <div class="card">
-          <img src="images/image_2.jpg" 
-               alt="A lake surrounded by mountains and forest" 
-               class="card__picture">
+          <img 
+          src="images/image_2.jpg" 
+          alt="A lake surrounded by mountains and forest" 
+          class="card__picture" />
           <div class="card__caption">
             <p class="card__description">Lake Louise</p>
-            <button class="card__like">
-            </button>
+            <button type="button" class="card__like"></button>
           </div>
         </div>
 
         <div class="card">
-          <img src="images/image_3.jpg" 
-               alt="Sunrise above dark hills" 
-               class="card__picture">
+          <img 
+          src="images/image_3.jpg" 
+          alt="Sunrise above dark hills" 
+          class="card__picture" />
           <div class="card__caption">
             <p class="card__description">Bald Mountains</p>
-            <button class="card__like">
-            </button>
+            <button type="button" class="card__like"></button>
           </div>
         </div>
 
         <div class="card">
-          <img src="images/image_4.jpg" 
-               alt="Starry night, mountains with piece of snow" 
-               class="card__picture">
+          <img 
+          src="images/image_4.jpg" 
+          alt="Starry night, mountains with piece of snow" 
+          class="card__picture" />
           <div class="card__caption">
             <p class="card__description">Latemar</p>
-            <button class="card__like">
-            </button>
+            <button type="button" class="card__like"></button>
           </div>
         </div>
 
         <div class="card">
-          <img src="images/image_5.jpg" 
-               alt="Coast of lake, mountains on the background" 
-               class="card__picture">
+          <img 
+          src="images/image_5.jpg" 
+          alt="Coast of lake, mountains on the background" 
+          class="card__picture" />
           <div class="card__caption">
             <p class="card__description">Vanoise National park</p>
-            <button class="card__like">
-            </button>
+            <button type="button" class="card__like"></button>
           </div>
         </div>
 
         <div class="card">
-          <img src="images/image_6.jpg" 
-               alt="Small dock with little boats on the mountain lake" 
-               class="card__picture">
+          <img 
+          src="images/image_6.jpg" 
+          alt="Small dock with little boats on the mountain lake" 
+          class="card__picture" />
           <div class="card__caption">
             <p class="card__description">Lago di Braies</p>
-            <button class="card__like">
-            </button>
+            <button type="button" class="card__like"></button>
           </div>
         </div>
       </section>
@@ -108,17 +112,31 @@
     <div class="popup">
       <div class="popup__box">
         <button class="popup__close-button"></button>
-        <form action="#" class="form">
+        <form 
+        action="#" 
+        class="form" 
+        name="edit-info-form">
           <h2 class="form__title">Edit profile</h2>
-          <input type="text" class="form__input form__input_type_name" placeholder="Enter your name">
-          <input type="text" class="form__input form__input_type_info" placeholder="Enter your info">
-          <button type="submit" class="form__submit-button">Save</button>
+
+          <input 
+          type="text" 
+          class="form__input form__input_type_name" 
+          placeholder="Enter your name" />
+
+          <input 
+          type="text" 
+          class="form__input form__input_type_info" 
+          placeholder="Enter your info" />
+
+          <button type="submit" class="form__submit-button">
+            Save
+          </button>
         </form>
       </div>
     </div>
 
   </div>
 
-  <script src="/scripts/index.js"></script>
+  <script src="scripts/index.js"></script>
 </body>
 </html>
