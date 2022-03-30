@@ -30,13 +30,13 @@ function handleProfileFormSubmit(evt) {
 
 form.addEventListener('submit', handleProfileFormSubmit);
 
-//like button action
-const likeButtons = document.querySelectorAll('.card__like');
+// //like button action
+// const likeButtons = document.querySelectorAll('.card__like');
 
-for (let likeButton of likeButtons) {
-  likeButton.addEventListener('click', function () {
-    likeButton.classList.toggle('card__like_active');
-  })
-}
+// for (let likeButton of likeButtons) {
+//   likeButton.addEventListener('click', function () {
+//     likeButton.classList.toggle('card__like_active');
+//   })
+// }
 
 
