@@ -1,5 +1,5 @@
 .profile {
-  padding-top: 40px;
+  padding-top: 36.25px;
   display: flex;
   justify-content: space-between;
   column-gap: 30px;
@@ -29,7 +29,7 @@
   grid-area: name;
   font-weight: 500;
   font-size: 42px;
-  line-height: 48px;
+  line-height: 0.8;
   align-self: center;
   max-width: 100%;
 }
@@ -48,7 +48,7 @@
   width: 24px;
   height: 24px;
   border: none;
-  align-self: center;
+  align-self: flex-end;
   cursor: pointer;
   transition: opacity 0.5s;
   padding: 0;
@@ -56,13 +56,9 @@
 
 .profile__add-button {
   background: transparent;
-  /* background: url(../../images/add_button.svg);
-  background-repeat: no-repeat; */
   padding: 14px 64px;
-  /* background-size: contain; */
   width: 150px;
   height: 50px;
-  /* border: none; */
   cursor: pointer;
   transition: opacity 0.5s;
   border: 2px solid #FFFFFF;
