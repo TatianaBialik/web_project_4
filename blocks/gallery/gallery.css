@@ -1,22 +1,28 @@
 .gallery {
   padding-top: 50px;
+  max-width: 100%;
+}
+
+.gallery__list {
+  list-style: none;
   display: grid;
   grid-template-columns: repeat(3,1fr);
   grid-template-rows: repeat(2,auto);
   column-gap: 17px;
   row-gap: 20px;
-  max-width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 @media screen and (max-width: 1100px) {
-  .gallery {
+  .gallery__list {
     grid-template-columns: repeat(2,1fr);
     grid-template-rows: repeat(3,1fr);
   }
 }
 
 @media screen and (max-width: 780px){
-  .gallery {
+  .gallery__list {
     grid-template-columns: 100%;
     grid-template-rows: repeat(6,1fr);
     padding: 36px 19px 0;
@@ -24,7 +30,7 @@
 }
 
 @media screen and (min-width: 526px) and (max-width: 780px) {
-  .gallery {
+  .gallery__list {
     padding: 36px 100px 0;
   }
 }
