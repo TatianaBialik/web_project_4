@@ -15,8 +15,9 @@
 }
 
 .popup__box {
-  width: 430px;
-  max-height: 330px;
+  max-width: 430px;
+  width: 100%;
+  min-height: 330px;
   position: relative;
 }
 
@@ -39,7 +40,8 @@
 
 @media screen and (max-width: 780px) {
   .popup__box {
-    width: 282px;
+    max-width: 282px;
+    width: 100%;
   }
 
   .popup__close-button {
