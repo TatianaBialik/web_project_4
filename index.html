@@ -7,13 +7,17 @@
   <meta name="author" content="Tatiana Bialik">
   <title>Around the U.S.</title>
   <link rel="stylesheet" href="pages/index.css">
+  <script> </script>
 </head>
 
 <body>
   <div class="page">
 
     <header class="header">
-      <img src="images/logo.svg" alt="Around the U.S. inscription" class="header__logo">
+      <img 
+      src="images/logo.svg" 
+      alt="Around the U.S. inscription" 
+      class="header__logo" />
     </header>
 
     <main class="main">
@@ -26,11 +30,17 @@
           <div class="profile__info">
             <h1 class="profile__name">Jacques Cousteau</h1>
             <p class="profile__about">Explorer</p>
-            <button type="button" class="profile__edit-button">
+            <button 
+            type="button" 
+            class="action-button profile__edit-button"
+            aria-label="Edit profile information button">
             </button>
           </div>
         </div>
-        <button type="button" class="profile__add-button">
+        <button 
+        type="button" 
+        class="action-button profile__add-button"
+        aria-label="Add a card button">
         </button>
       </section>
 
@@ -38,82 +48,21 @@
         <ul class="gallery__list">
           <template id="card">
             <li class="card">
-              <img src="" alt="" class="card__picture">
+              <button 
+              class="action-button card__delete-button" 
+              type="button"
+              aria-label="Delete card button"></button>
+              <img src="" alt="" class="card__picture" />
               <div class="card__caption">
                 <h2 class="card__description"></h2>
-                <button class="card__like"></button>
+                <button 
+                type="button" 
+                class="card__like"
+                aria-label="Like button"></button>
               </div>
             </li>
           </template>
-        </ul>
-        <!-- <ul class="gallery__list">
-          <li class="card">
-            <img 
-            src="images/image_1.jpg" 
-            alt="A river with forest on the banks, mountains in the background" 
-            class="card__picture" />
-            <div class="card__caption">
-              <h2 class="card__description">Yosemite Valley</h2>
-              <button type="button" class="card__like"></button>
-            </div>
-          </li>
-  
-          <li class="card">
-            <img 
-            src="images/image_2.jpg" 
-            alt="A lake surrounded by mountains and forest" 
-            class="card__picture" />
-            <div class="card__caption">
-              <h2 class="card__description">Lake Louise</h2>
-              <button type="button" class="card__like"></button>
-            </div>
-          </li>
-  
-          <li class="card">
-            <img 
-            src="images/image_3.jpg" 
-            alt="Sunrise above dark hills" 
-            class="card__picture" />
-            <div class="card__caption">
-              <h2 class="card__description">Bald Mountains</h2>
-              <button type="button" class="card__like"></button>
-            </div>
-          </li>
-  
-          <li class="card">
-            <img 
-            src="images/image_4.jpg" 
-            alt="Starry night, mountains with piece of snow" 
-            class="card__picture" />
-            <div class="card__caption">
-              <h2 class="card__description">Latemar</h2>
-              <button type="button" class="card__like"></button>
-            </div>
-          </li>
-  
-          <li class="card">
-            <img 
-            src="images/image_5.jpg" 
-            alt="Coast of lake, mountains on the background" 
-            class="card__picture" />
-            <div class="card__caption">
-              <h2 class="card__description">Vanoise National park</h2>
-              <button type="button" class="card__like"></button>
-            </div>
-          </li>
-  
-          <li class="card">
-            <img 
-            src="images/image_6.jpg" 
-            alt="Small dock with little boats on the mountain lake" 
-            class="card__picture" />
-            <div class="card__caption">
-              <h2 class="card__description">Lago di Braies</h2>
-              <button type="button" class="card__like"></button>
-            </div>
-          </li>
-        </ul> -->
-        
+        </ul>        
       </section>
     </main>
 
@@ -121,31 +70,85 @@
       <p class="footer__copyright">&#169; 2022 Around The U.S.</p>
     </footer>
 
-    <div class="popup">
+    <div class="popup popup_type_edit">
       <div class="popup__box">
-        <button type="button" class="popup__close-button"></button>
+        <button 
+        type="button" 
+        class="action-button popup__close-button"
+        aria-label="Close"></button>
         <form 
         action="#" 
-        class="form" 
+        class="form form_type_edit" 
         name="edit-info-form">
           <h2 class="form__title">Edit profile</h2>
 
           <input 
           name="name"
           type="text" 
-          class="form__input form__input_type_name" 
+          class="form__input form__input_type_name form__input_position_first" 
           placeholder="Enter your name" />
 
           <input 
           name="info"
           type="text" 
-          class="form__input form__input_type_info" 
+          class="form__input form__input_type_info form__input_position_next" 
           placeholder="Enter your info" />
 
-          <button type="submit" class="form__submit-button">
+          <button 
+          type="submit" 
+          class="form__submit-button"
+          aria-label="Save edited information">
             Save
           </button>
         </form>
+      </div>
+    </div>
+
+    <div class="popup popup_type_add-card">
+      <div class="popup__box">
+        <button 
+        type="button" 
+        class="action-button popup__close-button"
+        aria-label="Close"></button>
+        <form 
+        action="#" 
+        class="form form_type_add-card" 
+        name="add-form">
+          <h2 class="form__title">New place</h2>
+
+          <input 
+          name="title"
+          type="text" 
+          class="form__input form__input_type_title form__input_position_first" 
+          placeholder="Title" />
+
+          <input 
+          name="link"
+          type="text" 
+          class="form__input form__input_type_link form__input_position_next" 
+          placeholder="Image link" />
+
+          <button 
+          type="submit" 
+          class="form__submit-button"
+          aria-label="Submit card adding">
+            Create
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="popup popup_type_picture">
+      <div class="popup_type_picture__box">
+        <button 
+        type="button" 
+        class="action-button popup__close-button popup_type_picture__button"
+        aria-label="Close button"></button>
+        <img 
+        src="#" 
+        alt="" 
+        class="popup_type_picture__image">
+        <p class="popup_type_picture__caption"></p>
       </div>
     </div>
 

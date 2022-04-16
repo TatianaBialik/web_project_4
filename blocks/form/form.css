@@ -23,11 +23,11 @@
   outline: none;
 }
 
-.form__input_type_name {
+.form__input_position_first {
   margin-top: 54px;
 }
 
-.form__input_type_info {
+.form__input_position_next {
   margin-top: 29.74px;
 }
 

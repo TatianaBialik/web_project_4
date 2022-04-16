@@ -49,12 +49,10 @@
   grid-area: button;
   background: url('../../images/edit_button.svg');
   background-size: contain;
+  border: none;
   width: 24px;
   height: 24px;
-  border: none;
   align-self: center;
-  cursor: pointer;
-  transition: opacity 0.5s;
   padding: 0;
 }
 
@@ -64,8 +62,6 @@
   background-position: center;
   width: 150px;
   height: 50px;
-  cursor: pointer;
-  transition: opacity 0.5s;
   border: 2px solid #FFFFFF;
   box-sizing: border-box;
   border-radius: 2px;
@@ -73,14 +69,6 @@
 
 .profile__add-picture {
   width: 22px;
-}
-
-.profile__edit-button:hover {
-  opacity: 0.6;
-}
-
-.profile__add-button:hover {
-  opacity: 0.6;
 }
 
 @media screen and (max-width: 1100px) {
