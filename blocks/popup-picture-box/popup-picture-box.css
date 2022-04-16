@@ -1,4 +1,4 @@
-.popup_type_picture__box {
+.popup-picture-box {
   display: flex;
   flex-direction: column;
   row-gap: 10px;
@@ -7,11 +7,11 @@
   max-width: calc(100% - 80px);
 }
 
-.popup_type_picture__image {
+.popup-picture-box__image {
   max-height: 100%;
 }
 
-.popup_type_picture__caption {
+.popup-picture-box__caption {
   margin: 0;
   font-size: 12px;
   line-height: 1.2;
@@ -19,7 +19,7 @@
 }
 
 @media screen and (max-width: 780px) {
-  .popup_type_picture__button {
+  .popup-picture-box__button {
     top: -30px;
     right: -30px;
   }
