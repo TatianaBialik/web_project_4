@@ -11,6 +11,11 @@
 
 This is the photo gallery. You can change user name and info, put likes on photo.
 
+upd 16/04/22 New functions: 
+* to add a new card to the gallery;
+* to delete cards from the gallery;
+* to zoom a card photo by clicking on it.
+
 ### Figma
 
 * [Link to the project in Figma](https://www.figma.com/file/SurN1jaeEQIhuZEDMhmWWf/Sprint-4-Around-The-U.S.-desktop-mobile?node-id=0%3A1)

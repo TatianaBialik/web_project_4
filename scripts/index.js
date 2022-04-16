@@ -1,27 +1,33 @@
 const initialCards = [
   {
     name: "Yosemite Valley",
-    link: "https://code.s3.yandex.net/web-code/yosemite.jpg"
+    link: "https://code.s3.yandex.net/web-code/yosemite.jpg",
+    alt: "A river with forest on the banks, mountains in the background"
   },
   {
     name: "Lake Louise",
-    link: "https://code.s3.yandex.net/web-code/lake-louise.jpg"
+    link: "https://code.s3.yandex.net/web-code/lake-louise.jpg",
+    alt: "A lake surrounded by mountains and forest"
   },
   {
     name: "Bald Mountains",
-    link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg"
+    link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg",
+    alt: "Sunrise above dark hills"
   },
   {
     name: "Latemar",
-    link: "https://code.s3.yandex.net/web-code/latemar.jpg"
+    link: "https://code.s3.yandex.net/web-code/latemar.jpg",
+    alt: "Starry night, mountains with piece of snow"
   },
   {
     name: "Vanoise National Park",
-    link: "https://code.s3.yandex.net/web-code/vanoise.jpg"
+    link: "https://code.s3.yandex.net/web-code/vanoise.jpg",
+    alt: "Coast of lake, mountains on the background"
   },
   {
     name: "Lago di Braies",
-    link: "https://code.s3.yandex.net/web-code/lago.jpg"
+    link: "https://code.s3.yandex.net/web-code/lago.jpg",
+    alt: "Small dock with little boats on the mountain lake"
   }
 ];
 
@@ -33,13 +39,15 @@ const picturePopup = document.querySelector('.popup_type_picture');
 function addCard(card) {
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
   const cardLike = cardElement.querySelector('.card__like');
-  // const cardDeleteButton = cardElement.querySelector('.card__delete-button');
-  // const cardPicture = cardElement.querySelector('.card__picture');
+  const cardDeleteButton = cardElement.querySelector('.card__delete-button');
+  const cardPicture = cardElement.querySelector('.card__picture');
+  const cardDescription = cardElement.querySelector('.card__description');
 
-  cardElement.querySelector('.card__picture').src = card.link;
-  cardElement.querySelector('.card__description').textContent = card.name;
+  cardPicture.src = card.link;
+  cardPicture.alt = card.alt;
+  cardDescription.textContent = card.name;
 
-  const likeActivation = () => {
+  const handleLikeActivation = () => {
     cardLike.classList.toggle('card__like_active');
   }
 
@@ -53,9 +61,9 @@ function addCard(card) {
     openPopup(picturePopup);
   }
 
-  cardLike.addEventListener('click', likeActivation);
-  cardElement.querySelector('.card__delete-button').addEventListener('click', handleDeleteCardButton);
-  cardElement.querySelector('.card__picture').addEventListener('click', openPicturePopup);
+  cardLike.addEventListener('click', handleLikeActivation);
+  cardDeleteButton.addEventListener('click', handleDeleteCardButton);
+  cardPicture.addEventListener('click', openPicturePopup);
 
   cardContainer.prepend(cardElement);
 };
@@ -85,7 +93,7 @@ for (let button of closeButtons) {
 }
 
 // edit user info form actions
-const editButton = document.querySelector('.profile__edit-button');
+const profileEditButton = document.querySelector('.profile__edit-button');
 const popupEditBox = document.querySelector('.popup_type_edit');
 
 const editForm = popupEditBox.querySelector('.form_type_edit');
@@ -101,7 +109,7 @@ const openEditProfilePopup = () => {
   popupInputInfo.value = userAbout.textContent;
 }
 
-editButton.addEventListener('click', openEditProfilePopup);
+profileEditButton.addEventListener('click', openEditProfilePopup);
 
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
@@ -115,14 +123,14 @@ function handleProfileFormSubmit(evt) {
 editForm.addEventListener('submit', handleProfileFormSubmit);
 
 //add card form actions
-const addButton = document.querySelector('.profile__add-button');
+const cardAdditionButton = document.querySelector('.profile__add-button');
 const popupAddBox = document.querySelector('.popup_type_add-card');
 
-const addForm = document.querySelector('.form_type_add-card');
-const addPopupInputTitle = document.querySelector('.form__input_type_title');
-const addPopupInputLink = document.querySelector('.form__input_type_link');
+const addCardForm = document.querySelector('.form_type_add-card');
+const addCardPopupInputTitle = document.querySelector('.form__input_type_title');
+const addCardPopupInputLink = document.querySelector('.form__input_type_link');
 
-addButton.addEventListener('click', function() {
+cardAdditionButton.addEventListener('click', function() {
   openPopup(popupAddBox);
 });
 
@@ -130,15 +138,15 @@ function handleAddCardFormSubmit(evt) {
   evt.preventDefault();
   closePopup(popupAddBox);
   const addedCard = {};
-  if (addPopupInputTitle.value !== '' && addPopupInputLink.value !== '') {
-    addedCard.name = addPopupInputTitle.value;
-    addedCard.link = addPopupInputLink.value;
-    addPopupInputTitle.value = '';
-    addPopupInputLink.value = '';
+  if (addCardPopupInputTitle.value !== '' && addCardPopupInputLink.value !== '') {
+    addedCard.name = addCardPopupInputTitle.value;
+    addedCard.link = addCardPopupInputLink.value;
+    addCardPopupInputTitle.value = '';
+    addCardPopupInputLink.value = '';
     addCard(addedCard);
   }
 }
 
-addForm.addEventListener('submit', handleAddCardFormSubmit);
+addCardForm.addEventListener('submit', handleAddCardFormSubmit);
 
 
