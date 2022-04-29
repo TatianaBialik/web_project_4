@@ -84,17 +84,25 @@
 
           <input 
           name="name"
-          type="text" 
-          class="form__input form__input_type_name form__input_position_first" 
+          type="text"
+          minlength="2"
+          maxlength="40"
+          class="form__input form__input_type_name form__input_position_first"
+          id="edit-form-name-input"
           placeholder="Enter your name"
           required />
+          <span class="form__error edit-form-name-input-error"></span>
 
           <input 
           name="info"
-          type="text" 
-          class="form__input form__input_type_info form__input_position_next" 
+          type="text"
+          minlength="2"
+          maxlength="200"
+          class="form__input form__input_type_info form__input_position_next"
+          id="edit-form-info-input"
           placeholder="Enter your info"
           required />
+          <span class="form__error edit-form-info-input-error"></span>
 
           <button 
           type="submit" 
@@ -120,16 +128,23 @@
 
           <input 
           name="title"
-          type="text" 
-          class="form__input form__input_type_title form__input_position_first" 
-          placeholder="Title" />
+          type="text"
+          minlength="1"
+          maxlength="30"
+          class="form__input form__input_type_title form__input_position_first"
+          id="add-form-title-input"
+          placeholder="Title" 
+          required/>
+          <span class="form__error add-form-title-input-error"></span>
 
           <input 
           name="link"
-          type="text" 
-          class="form__input form__input_type_link form__input_position_next" 
+          type="url" 
+          class="form__input form__input_type_link form__input_position_next"
+          id="add-form-link-input"
           placeholder="Image link"
           required />
+          <span class="form__error add-form-link-input-error"></span>
 
           <button 
           type="submit" 
@@ -158,5 +173,6 @@
   </div>
 
   <script src="scripts/index.js"></script>
+  <script src="scripts/validate.js"></script>
 </body>
 </html>
