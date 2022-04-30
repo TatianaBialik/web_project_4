@@ -1,3 +1,5 @@
+import {resetFormValidation} from './validate.js';
+
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -78,23 +80,61 @@ initialCards.forEach(card => {
   renderCard(card);
 });
 
+/*
+open popup steps:
+  - set event listeners: 
+    close by clicking on overlay and close button, 
+    pressing escape button;
+  - reset form input fields and validation state;
+  - set submit button to disabled state.
+ */
+
+function closePopupByMouseEvent(popupElement) {
+  popupElement.addEventListener('click', evt => {
+    if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button')) {
+      closePopup(popupElement);
+    }
+  })
+}
+
+function closePopupByEscape(evt) {
+  if (evt.key === 'Escape') {
+    const popupElement = document.querySelector('.popup_opened');
+    closePopup(popupElement);
+  }
+}
+
+function setCloseEventListeners (popupElement) {
+  closePopupByMouseEvent(popupElement);
+  document.addEventListener('keydown', closePopupByEscape);
+}
+
+function resetPopupForm (popup) {
+  if (popup.querySelector('.form')) {
+    const popupFormElement = popup.querySelector('.form');
+    popupFormElement.reset();
+    resetFormValidation(popupFormElement);
+  };
+}
+
+function setDisabledButtonState(popup) {
+  if (popup.querySelector('.form')) {
+    const popupSubmitButton = popup.querySelector('.form__submit-button');
+    popupSubmitButton.classList.add('form__submit-button_disabled');
+  }
+}
+
 //open/close popup functions
 function openPopup(popup) {
+  resetPopupForm(popup);
+  setDisabledButtonState(popup);
+  setCloseEventListeners(popup);
   popup.classList.add('popup_opened');
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
-}
-
-//popup close buttons action
-const closeButtons = document.querySelectorAll('.popup__close-button');
-
-for (const button of closeButtons) {
-  const parentBox = button.parentElement;
-  button.addEventListener('click', () => {
-    closePopup(parentBox.parentElement);
-  });
+  document.removeEventListener('keydown', closePopupByEscape);
 }
 
 // edit user info form actions
@@ -114,17 +154,17 @@ function fillProfileForm() {
 }
 
 const openEditProfilePopup = () => {
-  fillProfileForm();
   openPopup(profileEditPopupBox);
+  fillProfileForm();
 }
 
 profileEditButton.addEventListener('click', openEditProfilePopup);
 
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
-  closePopup(profileEditPopupBox);
   profileUserName.textContent = popupInputName.value;
   profileUserAbout.textContent = popupInputInfo.value;
+  closePopup(profileEditPopupBox);
 }
 
 editProfileForm.addEventListener('submit', handleProfileFormSubmit);
@@ -143,15 +183,19 @@ cardAdditionButton.addEventListener('click', function() {
 
 function handleAddCardFormSubmit(evt) {
   evt.preventDefault();
-  closePopup(addCardPopupBox);
   const newCard = {};
   newCard.name = addCardPopupInputTitle.value;
   newCard.link = addCardPopupInputLink.value;
   newCard.alt = 'Here was a beautiful picture';
-  addCardForm.reset();
+  closePopup(addCardPopupBox);
   renderCard(newCard);
 }
 
 addCardForm.addEventListener('submit', handleAddCardFormSubmit);
+
+
+
+
+
 
 

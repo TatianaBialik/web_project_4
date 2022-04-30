@@ -16,6 +16,10 @@ upd 16/04/22 New functions:
 * to delete cards from the gallery;
 * to zoom a card photo by clicking on it.
 
+upd 30/04/22 New functions:
+* forms validation;
+* close modal window by clicking outside the window and pressing 'Escape' button.
+
 ### Figma
 
 * [Link to the project in Figma](https://www.figma.com/file/SurN1jaeEQIhuZEDMhmWWf/Sprint-4-Around-The-U.S.-desktop-mobile?node-id=0%3A1)

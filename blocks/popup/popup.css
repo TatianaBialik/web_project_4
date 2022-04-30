@@ -17,6 +17,7 @@
   transition: visibility 0.7s, opacity 0.7s;
   visibility: visible;
   opacity: 1;
+  cursor: pointer;
 }
 
 .popup__box {
@@ -24,6 +25,7 @@
   width: 100%;
   min-height: 330px;
   position: relative;
+  cursor: default;
 }
 
 .popup__close-button {

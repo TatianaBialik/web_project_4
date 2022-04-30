@@ -38,8 +38,10 @@ function hasInvalidInput (inputList) {
 function changeButtonState (inputList, buttonElement, configObject) {
   if (hasInvalidInput(inputList)) {
     buttonElement.classList.add(`${configObject.inactiveButtonClass}`);
+    buttonElement.disabled = true;
   } else {
     buttonElement.classList.remove(`${configObject.inactiveButtonClass}`);
+    buttonElement.disabled = false;
   }
 }
 
@@ -65,3 +67,12 @@ function enableValidation (configObject) {
 }
 
 enableValidation(configObject);
+
+function resetFormValidation (formElement) {
+  const inputList = Array.from(formElement.querySelectorAll(`.${configObject.inputSelector}`));
+  inputList.forEach((inputElement) => {
+    hideInputError (formElement, inputElement, configObject);
+  })
+}
+
+export { resetFormValidation };
