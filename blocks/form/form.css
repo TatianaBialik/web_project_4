@@ -62,7 +62,7 @@
 .form__submit-button_disabled {
   background-color: #fff;
   color: rgb(0,0,0,0.2);
-  border: 1px solid; 
+  border: 1px solid;
   border-color: rgb(0,0,0,0.2);
 }
 
