@@ -1,45 +1,15 @@
-import {resetFormValidation} from './validate.js';
-
-const initialCards = [
-  {
-    name: "Yosemite Valley",
-    link: "https://code.s3.yandex.net/web-code/yosemite.jpg",
-    alt: "A river with forest on the banks, mountains in the background"
-  },
-  {
-    name: "Lake Louise",
-    link: "https://code.s3.yandex.net/web-code/lake-louise.jpg",
-    alt: "A lake surrounded by mountains and forest"
-  },
-  {
-    name: "Bald Mountains",
-    link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg",
-    alt: "Sunrise above dark hills"
-  },
-  {
-    name: "Latemar",
-    link: "https://code.s3.yandex.net/web-code/latemar.jpg",
-    alt: "Starry night, mountains with piece of snow"
-  },
-  {
-    name: "Vanoise National Park",
-    link: "https://code.s3.yandex.net/web-code/vanoise.jpg",
-    alt: "Coast of lake, mountains on the background"
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://code.s3.yandex.net/web-code/lago.jpg",
-    alt: "Small dock with little boats on the mountain lake"
-  }
-];
+import { resetFormValidation, enableValidation, setButtonToDisabledState } from './validate.js';
+import { configObject, initialCards } from './constants.js';
 
 //add card action
 const cardContainer = document.querySelector('.gallery__list');
-const cardTemplate = document.querySelector('#card').content;
+const cardTemplate = document.querySelector('#card').content.querySelector('.card');
 const picturePopup = document.querySelector('.popup_type_picture');
+const picturePopupImage = picturePopup.querySelector('.popup-picture-box__image');
+const picturePopupCaption = picturePopup.querySelector('.popup-picture-box__caption');
 
 function createCard(card) {
-  const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
+  const cardElement = cardTemplate.cloneNode(true);
   const cardLike = cardElement.querySelector('.card__like');
   const cardDeleteButton = cardElement.querySelector('.card__delete-button');
   const cardPicture = cardElement.querySelector('.card__picture');
@@ -58,9 +28,9 @@ function createCard(card) {
   }
 
   const openPicturePopup = () => {
-    picturePopup.querySelector('.popup-picture-box__image').src = card.link;
-    picturePopup.querySelector('.popup-picture-box__image').alt = card.alt;
-    picturePopup.querySelector('.popup-picture-box__caption').textContent = card.name;
+    picturePopupImage.src = card.link;
+    picturePopupImage.alt = card.alt;
+    picturePopupCaption.textContent = card.name;
     openPopup(picturePopup);
   }
 
@@ -90,12 +60,19 @@ open popup steps:
  */
 
 function closePopupByMouseEvent(popupElement) {
-  popupElement.addEventListener('click', evt => {
+  popupElement.addEventListener('mousedown', evt => {
     if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button')) {
       closePopup(popupElement);
     }
   })
 }
+
+function setClosePopupEventListeners () {
+  const popupList = Array.from(document.querySelectorAll('.popup'));
+  popupList.forEach(popupElement => closePopupByMouseEvent(popupElement));
+}
+
+setClosePopupEventListeners();
 
 function closePopupByEscape(evt) {
   if (evt.key === 'Escape') {
@@ -104,31 +81,19 @@ function closePopupByEscape(evt) {
   }
 }
 
-function setCloseEventListeners (popupElement) {
-  closePopupByMouseEvent(popupElement);
-  document.addEventListener('keydown', closePopupByEscape);
-}
-
 function resetPopupForm (popup) {
-  if (popup.querySelector('.form')) {
-    const popupFormElement = popup.querySelector('.form');
-    popupFormElement.reset();
-    resetFormValidation(popupFormElement);
-  };
-}
-
-function setDisabledButtonState(popup) {
-  if (popup.querySelector('.form')) {
-    const popupSubmitButton = popup.querySelector('.form__submit-button');
-    popupSubmitButton.classList.add('form__submit-button_disabled');
-  }
+  const popupFormElement = popup.querySelector('.form');
+  popupFormElement.reset();
+  resetFormValidation(popupFormElement, configObject);
 }
 
 //open/close popup functions
 function openPopup(popup) {
-  resetPopupForm(popup);
-  setDisabledButtonState(popup);
-  setCloseEventListeners(popup);
+  if (popup.querySelector('.form')) {
+    resetPopupForm(popup);
+    setButtonToDisabledState(popup.querySelector('.form__submit-button'), configObject);
+  }
+  document.addEventListener('keydown', closePopupByEscape);
   popup.classList.add('popup_opened');
 }
 
@@ -193,9 +158,4 @@ function handleAddCardFormSubmit(evt) {
 
 addCardForm.addEventListener('submit', handleAddCardFormSubmit);
 
-
-
-
-
-
-
+enableValidation(configObject);

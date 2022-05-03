@@ -1,27 +1,27 @@
 const configObject = {
-  formSelector: "form",
-  inputSelector: "form__input",
-  submitButtonSelector: "form__submit-button",
+  formSelector: ".form",
+  inputSelector: ".form__input",
+  submitButtonSelector: ".form__submit-button",
   inactiveButtonClass: "form__submit-button_disabled",
   inputErrorClass: "form__input_type_error",
   errorClass: "form__error_visible"
 }
 
-function showInputError (formElement, inputElement, configObject) {
+function showInputError (formElement, inputElement, { inputErrorClass, errorClass }) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add(`${configObject.inputErrorClass}`);
+  inputElement.classList.add(`${inputErrorClass}`);
   errorElement.textContent = inputElement.validationMessage;
-  errorElement.classList.add(`${configObject.errorClass}`);
+  errorElement.classList.add(`${errorClass}`);
 }
 
-function hideInputError (formElement, inputElement, configObject) {
+function hideInputError (formElement, inputElement, { inputErrorClass, errorClass }) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove(`${configObject.inputErrorClass}`);
+  inputElement.classList.remove(`${inputErrorClass}`);
   errorElement.textContent = '';
-  errorElement.classList.remove(`${configObject.errorClass}`);
+  errorElement.classList.remove(`${errorClass}`);
 }
 
-function checkInputValidity (formElement, inputElement) {
+function checkInputValidity (formElement, inputElement, configObject) {
   if (!inputElement.validity.valid) {
     showInputError(formElement, inputElement, configObject);
   } else {
@@ -35,19 +35,27 @@ function hasInvalidInput (inputList) {
   })
 }
 
-function changeButtonState (inputList, buttonElement, configObject) {
+function setButtonToDisabledState (buttonElement, { inactiveButtonClass }) {
+  buttonElement.classList.add(`${inactiveButtonClass}`);
+  buttonElement.disabled = true;
+}
+
+function setButtonToEnabledState (buttonElement, { inactiveButtonClass }) {
+  buttonElement.classList.remove(`${inactiveButtonClass}`);
+  buttonElement.disabled = false;
+}
+
+function changeButtonState (inputList, buttonElement, { inactiveButtonClass }) {
   if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add(`${configObject.inactiveButtonClass}`);
-    buttonElement.disabled = true;
+    setButtonToDisabledState(buttonElement, { inactiveButtonClass });
   } else {
-    buttonElement.classList.remove(`${configObject.inactiveButtonClass}`);
-    buttonElement.disabled = false;
+    setButtonToEnabledState(buttonElement, { inactiveButtonClass });
   }
 }
 
-function setEventListeners (formElement, configObject) {
-  const inputList = Array.from(formElement.querySelectorAll(`.${configObject.inputSelector}`));
-  const buttonElement = formElement.querySelector(`.${configObject.submitButtonSelector}`);
+function setEventListeners (formElement, { inputSelector, submitButtonSelector }) {
+  const inputList = Array.from(formElement.querySelectorAll(`${inputSelector}`));
+  const buttonElement = formElement.querySelector(`${submitButtonSelector}`);
   changeButtonState(inputList, buttonElement, configObject);
 
   inputList.forEach((inputElement) => {
@@ -59,20 +67,18 @@ function setEventListeners (formElement, configObject) {
 }
 
 function enableValidation (configObject) {
-  const formList = Array.from(document.querySelectorAll(`.${configObject.formSelector}`));
+  const formList = Array.from(document.querySelectorAll(`${configObject.formSelector}`));
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', (evt) => evt.preventDefault);
     setEventListeners(formElement, configObject);
   })
 }
 
-enableValidation(configObject);
-
-function resetFormValidation (formElement) {
-  const inputList = Array.from(formElement.querySelectorAll(`.${configObject.inputSelector}`));
+function resetFormValidation (formElement, { inputSelector }) {
+  const inputList = Array.from(formElement.querySelectorAll(`${inputSelector}`));
   inputList.forEach((inputElement) => {
     hideInputError (formElement, inputElement, configObject);
   })
 }
 
-export { resetFormValidation };
+export { resetFormValidation, enableValidation, setButtonToDisabledState };
