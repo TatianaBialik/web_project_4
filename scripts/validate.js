@@ -1,12 +1,3 @@
-const configObject = {
-  formSelector: ".form",
-  inputSelector: ".form__input",
-  submitButtonSelector: ".form__submit-button",
-  inactiveButtonClass: "form__submit-button_disabled",
-  inputErrorClass: "form__input_type_error",
-  errorClass: "form__error_visible"
-}
-
 function showInputError (formElement, inputElement, { inputErrorClass, errorClass }) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add(`${inputErrorClass}`);
@@ -53,9 +44,9 @@ function changeButtonState (inputList, buttonElement, { inactiveButtonClass }) {
   }
 }
 
-function setEventListeners (formElement, { inputSelector, submitButtonSelector }) {
-  const inputList = Array.from(formElement.querySelectorAll(`${inputSelector}`));
-  const buttonElement = formElement.querySelector(`${submitButtonSelector}`);
+function setEventListeners (formElement, configObject) {
+  const inputList = Array.from(formElement.querySelectorAll(`${configObject.inputSelector}`));
+  const buttonElement = formElement.querySelector(`${configObject.submitButtonSelector}`);
   changeButtonState(inputList, buttonElement, configObject);
 
   inputList.forEach((inputElement) => {
@@ -74,10 +65,10 @@ function enableValidation (configObject) {
   })
 }
 
-function resetFormValidation (formElement, { inputSelector }) {
+function resetFormValidation (formElement, { inputSelector, inputErrorClass, errorClass }) {
   const inputList = Array.from(formElement.querySelectorAll(`${inputSelector}`));
   inputList.forEach((inputElement) => {
-    hideInputError (formElement, inputElement, configObject);
+    hideInputError (formElement, inputElement, { inputErrorClass, errorClass });
   })
 }
 

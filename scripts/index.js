@@ -50,14 +50,7 @@ initialCards.forEach(card => {
   renderCard(card);
 });
 
-/*
-open popup steps:
-  - set event listeners: 
-    close by clicking on overlay and close button, 
-    pressing escape button;
-  - reset form input fields and validation state;
-  - set submit button to disabled state.
- */
+//common popup functions
 
 function closePopupByMouseEvent(popupElement) {
   popupElement.addEventListener('mousedown', evt => {
@@ -84,15 +77,10 @@ function closePopupByEscape(evt) {
 function resetPopupForm (popup) {
   const popupFormElement = popup.querySelector('.form');
   popupFormElement.reset();
-  resetFormValidation(popupFormElement, configObject);
 }
 
 //open/close popup functions
 function openPopup(popup) {
-  if (popup.querySelector('.form')) {
-    resetPopupForm(popup);
-    setButtonToDisabledState(popup.querySelector('.form__submit-button'), configObject);
-  }
   document.addEventListener('keydown', closePopupByEscape);
   popup.classList.add('popup_opened');
 }
@@ -119,8 +107,11 @@ function fillProfileForm() {
 }
 
 const openEditProfilePopup = () => {
-  openPopup(profileEditPopupBox);
+  const popupFormElement = profileEditPopupBox.querySelector('.form');
+  resetFormValidation(popupFormElement, configObject);
+  setButtonToDisabledState(profileEditPopupBox.querySelector('.form__submit-button'), configObject);
   fillProfileForm();
+  openPopup(profileEditPopupBox);
 }
 
 profileEditButton.addEventListener('click', openEditProfilePopup);
@@ -142,9 +133,15 @@ const addCardForm = document.querySelector('.form_type_add-card');
 const addCardPopupInputTitle = document.querySelector('.form__input_type_title');
 const addCardPopupInputLink = document.querySelector('.form__input_type_link');
 
-cardAdditionButton.addEventListener('click', function() {
+const openAddCardPopup = () => {
+  const popupFormElement = addCardPopupBox.querySelector('.form');
+  resetFormValidation(popupFormElement, configObject);
+  setButtonToDisabledState(addCardPopupBox.querySelector('.form__submit-button'), configObject);
+  resetPopupForm(addCardPopupBox);
   openPopup(addCardPopupBox);
-});
+}
+
+cardAdditionButton.addEventListener('click', openAddCardPopup);
 
 function handleAddCardFormSubmit(evt) {
   evt.preventDefault();
