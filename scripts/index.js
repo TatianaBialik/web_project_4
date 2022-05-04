@@ -95,6 +95,7 @@ const profileEditButton = document.querySelector('.profile__edit-button');
 const profileEditPopupBox = document.querySelector('.popup_type_edit');
 
 const editProfileForm = profileEditPopupBox.querySelector('.form_type_edit');
+const editProfileFormSubmitButton = editProfileForm.querySelector('.form__submit-button')
 const popupInputName = editProfileForm.querySelector('.form__input_type_name');
 const popupInputInfo = editProfileForm.querySelector('.form__input_type_info');
 
@@ -107,9 +108,8 @@ function fillProfileForm() {
 }
 
 const openEditProfilePopup = () => {
-  const popupFormElement = profileEditPopupBox.querySelector('.form');
-  resetFormValidation(popupFormElement, configObject);
-  setButtonToDisabledState(profileEditPopupBox.querySelector('.form__submit-button'), configObject);
+  resetFormValidation(editProfileForm, configObject);
+  setButtonToDisabledState(editProfileFormSubmitButton, configObject);
   fillProfileForm();
   openPopup(profileEditPopupBox);
 }
@@ -130,13 +130,13 @@ const cardAdditionButton = document.querySelector('.profile__add-button');
 const addCardPopupBox = document.querySelector('.popup_type_add-card');
 
 const addCardForm = document.querySelector('.form_type_add-card');
+const addCardFormSubmitButton = addCardForm.querySelector('.form__submit-button');
 const addCardPopupInputTitle = document.querySelector('.form__input_type_title');
 const addCardPopupInputLink = document.querySelector('.form__input_type_link');
 
 const openAddCardPopup = () => {
-  const popupFormElement = addCardPopupBox.querySelector('.form');
-  resetFormValidation(popupFormElement, configObject);
-  setButtonToDisabledState(addCardPopupBox.querySelector('.form__submit-button'), configObject);
+  resetFormValidation(addCardForm, configObject);
+  setButtonToDisabledState(addCardFormSubmitButton, configObject);
   resetPopupForm(addCardPopupBox);
   openPopup(addCardPopupBox);
 }
