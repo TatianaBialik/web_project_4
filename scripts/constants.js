@@ -40,4 +40,6 @@ const initialCards = [
   }
 ];
 
-export { configObject, initialCards };
+const cardContainer = document.querySelector('.gallery__list');
+
+export { configObject, initialCards, cardContainer };

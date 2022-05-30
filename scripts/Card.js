@@ -1,5 +1,10 @@
 import { openPopup, closePopup } from './utils.js';
 
+/* Class Card:
+- creating a card element;
+- card generation;
+- event listeners: like button, delete button, open modal window */
+
 const picturePopup = document.querySelector('.popup_type_picture');
 const picturePopupImage = picturePopup.querySelector('.popup-picture-box__image');
 const picturePopupCaption = picturePopup.querySelector('.popup-picture-box__caption');

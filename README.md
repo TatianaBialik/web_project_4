@@ -20,6 +20,11 @@ upd 30/04/22 New functions:
 * forms validation;
 * close modal window by clicking outside the window and pressing 'Escape' button.
 
+upd 31/05/22 Refactor:
+* OOP concept implemented: Card and FormValidator classes are created
+Class Card includes all the image cards functionality and using for creating cards, has one public function that return a card element with attached event listeners.
+Class FormValidator includes functionality for forms validation and has a public method to enable form validation. Using by creating a FormValidator object for each form that should be validated.
+
 ### Figma
 
 * [Link to the project in Figma](https://www.figma.com/file/SurN1jaeEQIhuZEDMhmWWf/Sprint-4-Around-The-U.S.-desktop-mobile?node-id=0%3A1)
@@ -32,6 +37,7 @@ upd 30/04/22 New functions:
 * Grid Layout
 * Flexbox
 * Vanilla JavaScript
+* OOP
 
 ### GitHub Pages
 
