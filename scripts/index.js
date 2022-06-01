@@ -4,14 +4,14 @@ import { FormValidator } from './FormValidator.js';
 import { openPopup, closePopup } from './utils.js';
 
 function renderCard (card, cardContainer) {
-  cardContainer.prepend(card);
+  const cardInstance = new Card(card, '#card');
+  const cardElement = cardInstance.generateCard();
+  cardContainer.prepend(cardElement);
 }
 
 (function cardsInitialization() {
   initialCards.forEach(card => {
-    const cardInstance = new Card(card, '#card');
-    const cardElement = cardInstance.generateCard();
-    renderCard(cardElement, cardContainer);
+    renderCard(card, cardContainer);
   });
 })();
 
@@ -81,10 +81,8 @@ function handleAddCardFormSubmit(evt) {
   newCard.name = addCardPopupInputTitle.value;
   newCard.link = addCardPopupInputLink.value;
   newCard.alt = `Here was a beautiful picture of ${newCard.name}`;
-  const cardElement = new Card(newCard, '#card');
-  const cardInstance = cardElement.generateCard();
   closePopup(addCardPopupBox);
-  renderCard(cardInstance, cardContainer);
+  renderCard(newCard, cardContainer);
 }
 
 /* All event listeners for opening and submission modal windows in one function */
