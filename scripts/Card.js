@@ -1,20 +1,15 @@
-import { openPopup } from './utils.js';
-
 /* Class Card:
 - creating a card element;
 - card generation;
 - event listeners: like button, delete button, open modal window */
 
-const picturePopup = document.querySelector('.popup_type_picture');
-const picturePopupImage = picturePopup.querySelector('.popup-picture-box__image');
-const picturePopupCaption = picturePopup.querySelector('.popup-picture-box__caption');
-
 class Card {
-  constructor(cardData, templateSelector) {
+  constructor(cardData, templateSelector, handleCardClick) {
     this._image = cardData.link;
     this._title = cardData.name;
     this._alt = cardData.alt;
     this._cardSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -30,19 +25,12 @@ class Card {
     this._cardElement = null;
   }
 
-  _handleOpenPopup() {
-    picturePopupImage.src = this._image;
-    picturePopupImage.alt = this._alt
-    picturePopupCaption.textContent = this._title;
-    openPopup(picturePopup);
-  }
-
   _setEventListeners() {
     const deleteCardButton = this._cardElement.querySelector('.card__delete-button');
     deleteCardButton.addEventListener('click', () => this._handleDeleteCardButton());
     const likeButton = this._cardElement.querySelector('.card__like');
     likeButton.addEventListener('click', this._handleLikeButton);
-    this._cardElement.querySelector('.card__picture').addEventListener('click', () => this._handleOpenPopup());
+    this._cardElement.querySelector('.card__picture').addEventListener('click', this._handleCardClick);
   }
 
   generateCard() {

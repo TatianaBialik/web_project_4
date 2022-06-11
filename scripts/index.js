@@ -1,100 +1,87 @@
-import { configObject, initialCards, cardContainer } from './constants.js';
+import { 
+        configObject, 
+        initialCards, 
+        profileEditButton,
+        editProfileForm,
+        popupInputName,
+        popupInputInfo,
+        addCardButton,
+        addCardForm 
+      } from './constants.js';
 import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
-import { openPopup, closePopup } from './utils.js';
+import { Section } from './Section.js';
+import { PopupWithImage } from './PopupWithImage.js';
+import { PopupWithForm } from './PopupWithForm.js';
+import { UserInfo } from './UserInfo.js';
 
-function renderCard (card, cardContainer) {
-  const cardInstance = new Card(card, '#card');
-  const cardElement = cardInstance.generateCard();
-  cardContainer.prepend(cardElement);
-}
-
-(function cardsInitialization() {
-  initialCards.forEach(card => {
-    renderCard(card, cardContainer);
-  });
-})();
-
-/* Edit profile: 
-- open modal button handle;
-- fill the form;
-- submit edit form handle
-*/
-
-const profileEditButton = document.querySelector('.profile__edit-button');
-const profileEditPopupBox = document.querySelector('.popup_type_edit');
-
-const editProfileForm = profileEditPopupBox.querySelector('.form_type_edit');
-const popupInputName = editProfileForm.querySelector('.form__input_type_name');
-const popupInputInfo = editProfileForm.querySelector('.form__input_type_info');
-
-const profileUserName = document.querySelector('.profile__name');
-const profileUserAbout = document.querySelector('.profile__about');
+/* Forms validation */
 
 const editProfileFormValidator = new FormValidator(configObject,editProfileForm);
-
-function fillProfileForm() {
-  popupInputName.value = profileUserName.textContent;
-  popupInputInfo.value = profileUserAbout.textContent;
-}
-
-const openEditProfilePopup = () => {
-  editProfileFormValidator.resetFormValidation();
-  fillProfileForm();
-  openPopup(profileEditPopupBox);
-}
-
-function handleProfileFormSubmit(evt) {
-  evt.preventDefault();
-  profileUserName.textContent = popupInputName.value;
-  profileUserAbout.textContent = popupInputInfo.value;
-  closePopup(profileEditPopupBox);
-}
-
-/* Add card:
-- open add card modal window;
-- add card form submit handle;
-- reset form */
-
-function resetPopupForm (popup) {
-  const popupFormElement = popup.querySelector('.form');
-  popupFormElement.reset();
-}
-const cardAdditionButton = document.querySelector('.profile__add-button');
-const addCardPopupBox = document.querySelector('.popup_type_add-card');
-
-const addCardForm = document.querySelector('.form_type_add-card');
-const addCardPopupInputTitle = document.querySelector('.form__input_type_title');
-const addCardPopupInputLink = document.querySelector('.form__input_type_link');
-
 const addFormValidator = new FormValidator(configObject, addCardForm);
-
-const openAddCardPopup = () => {
-  addFormValidator.resetFormValidation(addCardForm, configObject);
-  resetPopupForm(addCardPopupBox);
-  openPopup(addCardPopupBox);
-}
-
-function handleAddCardFormSubmit(evt) {
-  evt.preventDefault();
-  const newCard = {};
-  newCard.name = addCardPopupInputTitle.value;
-  newCard.link = addCardPopupInputLink.value;
-  newCard.alt = `Here was a beautiful picture of ${newCard.name}`;
-  closePopup(addCardPopupBox);
-  renderCard(newCard, cardContainer);
-}
-
-/* All event listeners for opening and submission modal windows in one function */
-
-(function setModalsEventListeners() {
-  profileEditButton.addEventListener('click', openEditProfilePopup);
-  editProfileForm.addEventListener('submit', handleProfileFormSubmit);
-  addCardForm.addEventListener('submit', handleAddCardFormSubmit);
-  cardAdditionButton.addEventListener('click', openAddCardPopup);
-})();
 
 (function setFormsValidator() {
   editProfileFormValidator.enableValidation();
   addFormValidator.enableValidation();
 })();
+
+/* Sub functions */
+
+const handleCardClick = (item) => {
+  imagePopup.open(item.link, item.name);
+} 
+
+const renderCard = (item) => {
+  const card = new Card(item, '#card', () => handleCardClick(item));
+  const cardElement = card.generateCard();
+  return cardElement;
+}
+
+/* Page initialization */
+
+const cardsSection = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    cardsSection.addItem(renderCard(item));
+  }
+}, '.gallery__list');
+
+cardsSection.renderCards();
+
+/* Creating classes instances and setting event listeners */
+
+const userInfo = new UserInfo('.profile__name', '.profile__about');
+
+const imagePopup = new PopupWithImage('.popup_type_picture');
+imagePopup.setEventListeners();
+
+const editFormPopup = new PopupWithForm('.popup_type_edit', () => {
+  userInfo.setUserInfo(editFormPopup._getInputValues());
+}, editProfileFormValidator);
+editFormPopup.setEventListeners();
+
+const addCardPopup = new PopupWithForm('.popup_type_add-card', () => {
+  const newCardValues = addCardPopup._getInputValues();
+  newCardValues.alt = `Here was a beautiful picture of ${newCardValues.name}`;
+  cardsSection.addItem(renderCard(newCardValues));
+}, addFormValidator);
+addCardPopup.setEventListeners();
+
+/* Event listeners for opening modal windows */
+
+const setInputValues = () => {
+  const info = userInfo.getUserInfo();
+  popupInputName.value = info.name;
+  popupInputInfo.value = info.job;
+}
+
+(function setModalsEventListeners() {
+  profileEditButton.addEventListener('click', () => {
+    setInputValues();
+    editFormPopup.open()
+  });
+
+  addCardButton.addEventListener('click', () => addCardPopup.open());
+})();
+
+

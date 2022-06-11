@@ -1,3 +1,5 @@
+/* Form validation object */
+
 const configObject = {
   formSelector: ".form",
   inputSelector: ".form__input",
@@ -6,6 +8,8 @@ const configObject = {
   inputErrorClass: "form__input_type_error",
   errorClass: "form__error_visible"
 }
+
+/* Initial cards array*/
 
 const initialCards = [
   {
@@ -40,6 +44,25 @@ const initialCards = [
   }
 ];
 
-const cardContainer = document.querySelector('.gallery__list');
+/* Edit form constants */
 
-export { configObject, initialCards, cardContainer };
+const profileEditButton = document.querySelector('.profile__edit-button');
+const editProfileForm = document.querySelector('.form_type_edit');
+const popupInputName = editProfileForm.querySelector('.form__input_type_name');
+const popupInputInfo = editProfileForm.querySelector('.form__input_type_info');
+
+/* Add card form constants */
+
+const addCardButton = document.querySelector('.profile__add-button');
+const addCardForm = document.querySelector('.form_type_add-card');
+
+export { 
+        configObject, 
+        initialCards, 
+        profileEditButton,
+        editProfileForm,
+        popupInputName,
+        popupInputInfo,
+        addCardButton,
+        addCardForm
+       };
