@@ -27,6 +27,18 @@ Class Card includes all the image cards functionality and using for creating car
 
 Class FormValidator includes functionality for forms validation and has a public method to enable form validation. Using by creating a FormValidator object for each form that should be validated.
 
+upd 12/06/22 Refactor:
+* File structure changed.
+* Popup parent class with PopupWithImage and PopupWithForm child classes created, Section and UserInfo classes created
+
+Class Popup includes modal windows basic functionality (open/close modal window), PopupWithForm and PopupWithImage extend its functionality accordingly modal window type.
+
+Class Section includes functionality for cards gallery rendering.
+
+Class UserInfo created for interaction with values of user profile info.
+
+* Project built with Webpack.
+
 ### Figma
 
 * [Link to the project in Figma](https://www.figma.com/file/SurN1jaeEQIhuZEDMhmWWf/Sprint-4-Around-The-U.S.-desktop-mobile?node-id=0%3A1)

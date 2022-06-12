@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Tatiana Bialik">
   <title>Around the U.S.</title>
-  <link rel="stylesheet" href="pages/index.css">
+  <!-- <link rel="stylesheet" href="pages/index.css"> -->
   <script> </script>
 </head>
 
@@ -15,7 +15,7 @@
 
     <header class="header">
       <img 
-      src="images/logo.svg" 
+      src="<%= require('./images/logo.svg')%>"
       alt="Around the U.S. inscription" 
       class="header__logo" />
     </header>
@@ -24,7 +24,7 @@
       <section class="profile">
         <div class="profile__user">
           <img 
-          src="images/avatar.png" 
+          src="<%= require('./images/avatar.png')%>" 
           alt="Round photo of old man wore a red hat and glasses" 
           class="avatar" />
           <div class="profile__info">
@@ -174,9 +174,6 @@
 
   </div>
 
-  <script type="module" src="scripts/Card.js"></script>
-  <script type="module" src="scripts/utils.js"></script>
-  <script type="module" src="scripts/index.js"></script>
-  <!-- <script type="module" src="scripts/validate.js"></script> -->
+  <!-- <script type="module" src="pages/index.js"></script> -->
 </body>
 </html>
