@@ -54,23 +54,19 @@ cardsSection.renderCards();
 const userInfo = new UserInfo('.profile__name', '.profile__about');
 
 const imagePopup = new PopupWithImage('.popup_type_picture');
-imagePopup.setEventListeners();
 
-const editFormPopup = new PopupWithForm('.popup_type_edit', () => {
-  userInfo.setUserInfo(editFormPopup._getInputValues());
+const editFormPopup = new PopupWithForm('.popup_type_edit', (inputValues) => {
+  userInfo.setUserInfo(inputValues);
 }, editProfileFormValidator);
-editFormPopup.setEventListeners();
 
-const addCardPopup = new PopupWithForm('.popup_type_add-card', () => {
-  const newCardValues = addCardPopup._getInputValues();
-  newCardValues.alt = `Here was a beautiful picture of ${newCardValues.name}`;
-  cardsSection.addItem(renderCard(newCardValues));
+const addCardPopup = new PopupWithForm('.popup_type_add-card', (inputValues) => {
+  inputValues.alt = `Here was a beautiful picture of ${newCardValues.name}`;
+  cardsSection.addItem(renderCard(inputValues));
 }, addFormValidator);
-addCardPopup.setEventListeners();
 
 /* Event listeners for opening modal windows */
 
-const setInputValues = () => {
+const fillProfileInfoForm = () => {
   const info = userInfo.getUserInfo();
   popupInputName.value = info.name;
   popupInputInfo.value = info.job;
@@ -78,7 +74,7 @@ const setInputValues = () => {
 
 (function setModalsEventListeners() {
   profileEditButton.addEventListener('click', () => {
-    setInputValues();
+    fillProfileInfoForm();
     editFormPopup.open()
   });
 

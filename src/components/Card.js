@@ -20,14 +20,14 @@ class Card {
     evt.target.classList.toggle('card__like_active');
   }
 
-  _handleDeleteCardButton() {
+  _handleDeleteCardButton = () => {
     this._cardElement.remove();
     this._cardElement = null;
   }
 
   _setEventListeners() {
     const deleteCardButton = this._cardElement.querySelector('.card__delete-button');
-    deleteCardButton.addEventListener('click', () => this._handleDeleteCardButton());
+    deleteCardButton.addEventListener('click', this._handleDeleteCardButton);
     const likeButton = this._cardElement.querySelector('.card__like');
     likeButton.addEventListener('click', this._handleLikeButton);
     this._cardElement.querySelector('.card__picture').addEventListener('click', this._handleCardClick);
