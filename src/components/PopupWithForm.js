@@ -27,13 +27,20 @@ export class PopupWithForm extends Popup {
     this._formElement.reset();
   }
 
-  setEventListeners() {
-    super.setEventListeners();
-    this._formElement.addEventListener('submit', (evt) => {
-      evt.preventDefault();
-      const inputValues = this._getInputValues();
-      this._handleSubmit(inputValues);
-      this.close();
-    });
+  _onSubmit = (evt) => {
+    evt.preventDefault();
+    const inputValues = this._getInputValues();
+    this._handleSubmit(inputValues);
+    this.close();
+  }
+
+  _setEventListeners() {
+    super._setEventListeners();
+    this._formElement.addEventListener('submit', this._onSubmit);
+  }
+
+  _removeEventListeners() {
+    super._removeEventListeners();
+    this._formElement.removeEventListener('submit', this._onSubmit);
   }
 }

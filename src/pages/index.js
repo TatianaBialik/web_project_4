@@ -60,7 +60,7 @@ const editFormPopup = new PopupWithForm('.popup_type_edit', (inputValues) => {
 }, editProfileFormValidator);
 
 const addCardPopup = new PopupWithForm('.popup_type_add-card', (inputValues) => {
-  inputValues.alt = `Here was a beautiful picture of ${newCardValues.name}`;
+  inputValues.alt = `Here was a beautiful picture of ${inputValues.name}`;
   cardsSection.addItem(renderCard(inputValues));
 }, addFormValidator);
 
