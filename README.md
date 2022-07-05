@@ -59,8 +59,3 @@ Class Section includes functionality for cards gallery rendering.
 Class UserInfo created for interaction with values of user profile info.
 
 * Project built with Webpack.
-
-upd 05/07/22 API interaction added:
-* All the initial information loads from server.
-* All changings save to the server: loaded images, profile info editing, likes on cards, cards deleting.
-* Function to change a profile picture added
