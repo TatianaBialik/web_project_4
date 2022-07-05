@@ -132,7 +132,7 @@ const handleAddCardSubmission = (popup) => {
 
   api.addCard(newCardValues)
     .then(res => {
-      cardsSection.addItem(renderCard(res))
+      cardsSection.addNewItem(renderCard(res))
     })
     .finally(() => {
       popup.close();
@@ -144,21 +144,21 @@ const addCardPopup = new PopupWithForm(
   '.popup_type_add-card', 
   () => handleAddCardSubmission(addCardPopup), 
   addFormValidator);
-  addCardPopup.setEventListeners();
+addCardPopup.setEventListeners();
 
-  const handleChangeAvatarSubmission = (popup) => {
-    const formButton = changeAvatarForm.querySelector('.form__submit-button')
-    const formButtonText = renderLoading(formButton);
+const handleChangeAvatarSubmission = (popup) => {
+  const formButton = changeAvatarForm.querySelector('.form__submit-button')
+  const formButtonText = renderLoading(formButton);
 
-    api.editProfilePhoto(popup.getInputValues().avatar)
-      .then(res => {
-        avatar.src = res.avatar;
-      })
-      .finally(() => {
-        popup.close();
-        formButton.textContent = formButtonText;
-      })
-  }
+  api.editProfilePhoto(popup.getInputValues().avatar)
+    .then(res => {
+      avatar.src = res.avatar;
+    })
+    .finally(() => {
+      popup.close();
+      formButton.textContent = formButtonText;
+    })
+}
 
 const changeAvatarPopup = new PopupWithForm(
   '.popup_type_edit-avatar', 
