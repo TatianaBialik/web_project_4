@@ -7,9 +7,31 @@
 * Technologies
 * GitHub Pages
 
+### GitHub Pages
+
+[Link to the project on GitHub Pages](https://tatianabialik.github.io/web_project_4/)
 ### Intro
 
 This is the photo gallery. You can change user name and info, put likes on photo.
+
+
+### Figma
+
+* [Link to the project in Figma](https://www.figma.com/file/SurN1jaeEQIhuZEDMhmWWf/Sprint-4-Around-The-U.S.-desktop-mobile?node-id=0%3A1)
+
+### Technologies
+
+* Semantic HTML5
+* Flat BEM
+* Media Queries
+* Grid Layout
+* Flexbox
+* Vanilla JavaScript
+* OOP
+* Promises
+* Server requests
+
+### Updates
 
 upd 16/04/22 New functions: 
 * to add a new card to the gallery;
@@ -39,20 +61,7 @@ Class UserInfo created for interaction with values of user profile info.
 
 * Project built with Webpack.
 
-### Figma
-
-* [Link to the project in Figma](https://www.figma.com/file/SurN1jaeEQIhuZEDMhmWWf/Sprint-4-Around-The-U.S.-desktop-mobile?node-id=0%3A1)
-
-### Technologies
-
-* Semantic HTML5
-* Flat BEM
-* Media Queries
-* Grid Layout
-* Flexbox
-* Vanilla JavaScript
-* OOP
-
-### GitHub Pages
-
-[Link to the project on GitHub Pages](https://tatianabialik.github.io/web_project_4/)
+upd 05/07/22 API interactions added:
+* Initial information load from server.
+* All changes save to server: new cards adding, likes, profile photo and info changing.
+* Function to change profile photo added.
