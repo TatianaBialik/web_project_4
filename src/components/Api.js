@@ -72,8 +72,8 @@ class Api {
     .catch(err => console.log(err));
   }
 
-  editProfileInfo({name,about}) {
-    return fetch(this._baseUrl + '/users/me', {
+  editProfileInfo(name,about) {
+    return fetch(this._baseUrl + '/user/me', {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
