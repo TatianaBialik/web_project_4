@@ -9,14 +9,9 @@ export class Section {
     this._section.append(item);
   }
 
-<<<<<<< HEAD
-  renderCards() {
-    this._items.forEach(this._renderer);
-=======
   renderCards(items) {
     items.forEach(item => {
       this._renderer(item);
     })
->>>>>>> develop
   }
 }

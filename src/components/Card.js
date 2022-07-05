@@ -34,9 +34,6 @@ class Card {
     return this._likes.find(user => user._id === this._userId);
   }
 
-<<<<<<< HEAD
-  _handleDeleteCardButton = () => {
-=======
   setLikes(likes) {
     this._likes = likes;
     const likesAmount = this._likes.length;
@@ -52,19 +49,14 @@ class Card {
   }
 
  deleteCard() {
->>>>>>> develop
     this._cardElement.remove();
     this._cardElement = null;
   }
 
   _setEventListeners() {
     const deleteCardButton = this._cardElement.querySelector('.card__delete-button');
-<<<<<<< HEAD
-    deleteCardButton.addEventListener('click', this._handleDeleteCardButton);
-=======
     deleteCardButton.addEventListener('click', () => this._handleDeleteCardButton());
 
->>>>>>> develop
     const likeButton = this._cardElement.querySelector('.card__like');
     likeButton.addEventListener('click', this._handleLikeButton);
 

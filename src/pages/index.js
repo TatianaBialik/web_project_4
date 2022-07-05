@@ -94,15 +94,6 @@ const userInfo = new UserInfo('.profile__name', '.profile__about');
 
 const imagePopup = new PopupWithImage('.popup_type_picture');
 
-<<<<<<< HEAD
-const editFormPopup = new PopupWithForm('.popup_type_edit', (inputValues) => {
-  userInfo.setUserInfo(inputValues);
-}, editProfileFormValidator);
-
-const addCardPopup = new PopupWithForm('.popup_type_add-card', (inputValues) => {
-  inputValues.alt = `Here was a beautiful picture of ${inputValues.name}`;
-  cardsSection.addItem(renderCard(inputValues));
-=======
 function renderLoading(button) {
   const buttonText = button.textContent;
   button.textContent = 'Saving...';
@@ -141,7 +132,6 @@ const addCardPopup = new PopupWithForm('.popup_type_add-card', () => {
       formButton.textContent = formButtonText
     })
   newCardValues.alt = `Here was a beautiful picture of ${newCardValues.name}`;
->>>>>>> develop
 }, addFormValidator);
 
 const changeAvatarPopup = new PopupWithForm('.popup_type_edit-avatar', () => {
