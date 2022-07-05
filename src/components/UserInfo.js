@@ -10,6 +10,6 @@ export class UserInfo {
 
   setUserInfo(user) {
     this._nameField.textContent = user.name;
-    this._jobField.textContent = user.info;
+    this._jobField.textContent = user.about;
   }
 }

@@ -56,6 +56,15 @@ const popupInputInfo = editProfileForm.querySelector('.form__input_type_info');
 const addCardButton = document.querySelector('.profile__add-button');
 const addCardForm = document.querySelector('.form_type_add-card');
 
+/* Change profile picture form constants */
+
+const changeAvatarForm = document.querySelector('.form_type_edit-avatar');
+
+/* User profile */
+
+const avatar = document.querySelector('.profile__avatar');
+
+
 export { 
         configObject, 
         initialCards, 
@@ -64,5 +73,7 @@ export {
         popupInputName,
         popupInputInfo,
         addCardButton,
-        addCardForm
+        addCardForm,
+        avatar,
+        changeAvatarForm
        };

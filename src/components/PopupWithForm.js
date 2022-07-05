@@ -7,7 +7,7 @@ export class PopupWithForm extends Popup {
     this._formValidator = formValidator;
   }
 
-  _getInputValues() {
+  getInputValues() {
     const inputList = Array.from(this._popupElement.querySelectorAll('.form__input'));
     const valuesObject = {};
     inputList.forEach(input => {
@@ -31,7 +31,7 @@ export class PopupWithForm extends Popup {
     this._popupElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
       this._submitFunction();
-      this.close();
+      // this.close();
     });
   }
 }
