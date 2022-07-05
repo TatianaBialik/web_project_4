@@ -144,6 +144,7 @@ const addCardPopup = new PopupWithForm(
   '.popup_type_add-card', 
   () => handleAddCardSubmission(addCardPopup), 
   addFormValidator);
+  addCardPopup.setEventListeners();
 
   const handleChangeAvatarSubmission = (popup) => {
     const formButton = changeAvatarForm.querySelector('.form__submit-button')
