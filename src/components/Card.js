@@ -26,23 +26,14 @@ class Card {
     return document.querySelector(this._cardSelector).content.querySelector('.card').cloneNode(true);
   }
 
-  // _handleLikeButton = (evt) => {
-  //   evt.target.classList.toggle('card__like_active');
-  // }
-
   isLiked() {
     return this._likes.find(user => user._id === this._userId);
   }
 
-<<<<<<< HEAD
-  _handleDeleteCardButton = () => {
-=======
   setLikes(likes) {
     this._likes = likes;
     const likesAmount = this._likes.length;
     this._cardElement.querySelector('.card__like-counter').textContent = likesAmount;
-
-    // const cardIsLikedByUser = this.isLiked;
 
     if(this.isLiked()) {
       this._cardElement.querySelector('.card__like').classList.add('card__like_active');
@@ -52,19 +43,14 @@ class Card {
   }
 
  deleteCard() {
->>>>>>> develop
     this._cardElement.remove();
     this._cardElement = null;
   }
 
   _setEventListeners() {
     const deleteCardButton = this._cardElement.querySelector('.card__delete-button');
-<<<<<<< HEAD
-    deleteCardButton.addEventListener('click', this._handleDeleteCardButton);
-=======
     deleteCardButton.addEventListener('click', () => this._handleDeleteCardButton());
 
->>>>>>> develop
     const likeButton = this._cardElement.querySelector('.card__like');
     likeButton.addEventListener('click', this._handleLikeButton);
 
