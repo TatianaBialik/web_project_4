@@ -17,14 +17,14 @@
 @media screen and (max-width: 1100px) {
   .gallery__list {
     grid-template-columns: repeat(2,1fr);
-    grid-template-rows: repeat(3,1fr);
+    /* grid-template-rows: repeat(1fr); */
   }
 }
 
 @media screen and (max-width: 780px){
   .gallery__list {
     grid-template-columns: 100%;
-    grid-template-rows: repeat(6,1fr);
+    /* grid-template-rows: repeat(6,1fr); */
     padding: 36px 19px 0;
   }
 }
