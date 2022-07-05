@@ -31,13 +31,31 @@ const changeAvatarFormValidator = new FormValidator(configObject,changeAvatarFor
   changeAvatarFormValidator.enableValidation();
 })();
 
-/* Sub functions */
+/* Card handlers and rendering */
 
 const handleCardClick = (item) => {
   imagePopup.open(item.link, item.name);
 } 
 
+const handleLikeButton = (card) => {
+  if (card.isLiked()) {
+    api.removeLike(card.getId())
+      .then(res => {
+        card.setLikes(res.likes);
+      }) 
+  } else {
+    api.addLike(card.getId())
+      .then(res => {
+        card.setLikes(res.likes);
+      })
+  }
+}
+
 let cardToDelete;
+const handleDeleteCardButton = (card) => {
+  deleteCardSubmissionPopup.open();
+  cardToDelete = card;
+}
 
 const renderCard = (item) => {
   const card = new Card(
@@ -46,23 +64,9 @@ const renderCard = (item) => {
     item.owner._id,
     '#card', 
     () => handleCardClick(item), 
-    () => {
-      if (card.isLiked()) {
-        api.removeLike(card.getId())
-          .then(res => {
-            card.setLikes(res.likes);
-          }) 
-      } else {
-        api.addLike(card.getId())
-          .then(res => {
-            card.setLikes(res.likes);
-          })
-      }
-    },
-    () => {
-      deleteCardSubmissionPopup.open();
-      cardToDelete = card;
-    });
+    () => handleLikeButton(card),
+    () => handleDeleteCardButton(card)
+  );
   const cardElement = card.generateCard();
   return cardElement;
 }
@@ -75,7 +79,6 @@ const cardsSection = new Section({
     
   }
 }, '.gallery__list');
-
 
 let userId;
 
@@ -100,60 +103,77 @@ function renderLoading(button) {
   return buttonText;
 }
 
-//////////////////////////////////////////////////////////////////////////////////////
-const editFormPopup = new PopupWithForm('.popup_type_edit', () => {
+const handleEditSubmission = (popup) => {
   const formButton = editProfileForm.querySelector('.form__submit-button')
   const formButtonText = renderLoading(formButton);
 
-  api.editProfileInfo(editFormPopup.getInputValues())
+  api.editProfileInfo(popup.getInputValues())
     .then(res => {
       userInfo.setUserInfo(res);
     })
     .finally(() => {
-      editFormPopup.close();
+      popup.close();
       formButton.textContent = formButtonText
     })
-}, editProfileFormValidator);
-editFormPopup.setEventListeners();
-/////////////////////////////////////////////////////////////////////////////////////
+}
 
-const addCardPopup = new PopupWithForm('.popup_type_add-card', () => {
-  const newCardValues = addCardPopup.getInputValues();
+const editFormPopup = new PopupWithForm(
+  '.popup_type_edit', 
+  () => handleEditSubmission(editFormPopup), 
+  editProfileFormValidator);
+editFormPopup.setEventListeners();
+
+const handleAddCardSubmission = (popup) => {
+  const newCardValues = popup.getInputValues();
+  newCardValues.alt = `Here was a beautiful picture of ${newCardValues.name}`;
 
   const formButton = addCardForm.querySelector('.form__submit-button')
   const formButtonText = renderLoading(formButton);
 
-  api.addCard(newCardValues.name, newCardValues.link)
+  api.addCard(newCardValues)
     .then(res => {
-      cardsSection.addItem(renderCard(res));
+      cardsSection.addItem(renderCard(res))
     })
     .finally(() => {
-      addCardPopup.close();
-      formButton.textContent = formButtonText
-    })
-  newCardValues.alt = `Here was a beautiful picture of ${newCardValues.name}`;
-}, addFormValidator);
-
-const changeAvatarPopup = new PopupWithForm('.popup_type_edit-avatar', () => {
-  const formButton = changeAvatarForm.querySelector('.form__submit-button')
-  const formButtonText = renderLoading(formButton);
-
-  api.editProfilePhoto(changeAvatarPopup.getInputValues().avatar)
-    .then(res => {
-      avatar.src = res.avatar;
-    })
-    .finally(() => {
-      changeAvatarPopup.close();
+      popup.close();
       formButton.textContent = formButtonText;
     })
-}, changeAvatarFormValidator);
+}
+
+const addCardPopup = new PopupWithForm(
+  '.popup_type_add-card', 
+  () => handleAddCardSubmission(addCardPopup), 
+  addFormValidator);
+
+  const handleChangeAvatarSubmission = (popup) => {
+    const formButton = changeAvatarForm.querySelector('.form__submit-button')
+    const formButtonText = renderLoading(formButton);
+
+    api.editProfilePhoto(popup.getInputValues().avatar)
+      .then(res => {
+        avatar.src = res.avatar;
+      })
+      .finally(() => {
+        popup.close();
+        formButton.textContent = formButtonText;
+      })
+  }
+
+const changeAvatarPopup = new PopupWithForm(
+  '.popup_type_edit-avatar', 
+  () => handleChangeAvatarSubmission(changeAvatarPopup), 
+  changeAvatarFormValidator);
 changeAvatarPopup.setEventListeners();
 
-const deleteCardSubmissionPopup = new PopupWithConfirmation('.popup_type_delete-card', () => {
+const handleDeleteCardSubmission = (popup) => {
   api.deleteCard(cardToDelete.getId())
-    .finally(deleteCardSubmissionPopup.close());
+    .finally(popup.close());
   cardToDelete.deleteCard();
-});
+}
+
+const deleteCardSubmissionPopup = new PopupWithConfirmation(
+  '.popup_type_delete-card', 
+  () => handleDeleteCardSubmission(deleteCardSubmissionPopup));
 deleteCardSubmissionPopup.setEventListeners();
 
 /* Event listeners for opening modal windows */

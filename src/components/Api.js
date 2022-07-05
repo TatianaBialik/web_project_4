@@ -1,7 +1,3 @@
-// https://around.nomoreparties.co/v1/cohort-3-en
-// Token: c0d07090-8c80-49c2-aa7a-cd5677a34984
-// Group ID: cohort-3-en
-
 class Api {
   constructor(options) {
     this._baseUrl = options.baseUrl;
@@ -9,7 +5,7 @@ class Api {
   }
 
   getUserInfo() {
-    return fetch(this._baseUrl + '/user/me', {
+    return fetch(this._baseUrl + '/users/me', {
       headers: this._headers
     })
       .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
@@ -22,7 +18,7 @@ class Api {
       .catch(err => console.log(err));
   }
 
-  addCard(name,link) {
+  addCard({name,link}) {
     return fetch(this._baseUrl + '/cards', {
       method: 'POST',
       headers: this._headers,

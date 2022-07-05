@@ -1,6 +1,5 @@
 export class Section {
-  constructor({ /*items,*/ renderer }, sectionSelector) {
-    // this._items = items;
+  constructor({ renderer }, sectionSelector) {
     this._renderer = renderer;
     this._section = document.querySelector(sectionSelector);
   }

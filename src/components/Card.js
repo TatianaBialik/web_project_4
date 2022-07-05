@@ -26,10 +26,6 @@ class Card {
     return document.querySelector(this._cardSelector).content.querySelector('.card').cloneNode(true);
   }
 
-  // _handleLikeButton = (evt) => {
-  //   evt.target.classList.toggle('card__like_active');
-  // }
-
   isLiked() {
     return this._likes.find(user => user._id === this._userId);
   }
@@ -38,8 +34,6 @@ class Card {
     this._likes = likes;
     const likesAmount = this._likes.length;
     this._cardElement.querySelector('.card__like-counter').textContent = likesAmount;
-
-    // const cardIsLikedByUser = this.isLiked;
 
     if(this.isLiked()) {
       this._cardElement.querySelector('.card__like').classList.add('card__like_active');
