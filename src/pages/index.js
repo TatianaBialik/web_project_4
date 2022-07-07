@@ -99,6 +99,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
 const userInfo = new UserInfo('.profile__name', '.profile__about', '.profile__avatar');
 
 const imagePopup = new PopupWithImage('.popup_type_picture');
+imagePopup.setEventListeners();
 
 const handleEditSubmission = (popup) => {
   popup.renderLoading(true);
