@@ -55,13 +55,12 @@ export class FormValidator {
   }
   
   _setEventListeners () {
-    const inputList = Array.from(this._formElement.querySelectorAll(this._config.inputSelector));
-    this._changeButtonState(inputList, this._buttonElement);
+    this._changeButtonState(this._inputList, this._buttonElement);
   
-    inputList.forEach((inputElement) => {
+    this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._checkInputValidity(inputElement)
-        this._changeButtonState(inputList, this._buttonElement);
+        this._changeButtonState(this._inputList, this._buttonElement);
       })
     })
   }

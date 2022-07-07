@@ -4,18 +4,20 @@ class Api {
     this._headers = options.headers;
   }
 
+  _checkResponse(res) {
+    return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
+  }
+
   getUserInfo() {
     return fetch(this._baseUrl + '/users/me', {
       headers: this._headers
     })
-      .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
-      .catch(err => console.log(err));
+      .then(this._checkResponse);
   }
 
   getInitialCards() {
     return fetch(this._baseUrl + '/cards', {headers: this._headers})
-      .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
-      .catch(err => console.log(err));
+      .then(this._checkResponse);
   }
 
   addCard({name,link}) {
@@ -27,8 +29,7 @@ class Api {
         link 
       })
     })
-    .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
-    .catch(err => console.log(err))
+    .then(this._checkResponse)
   }
 
   addLike(id) {
@@ -36,8 +37,7 @@ class Api {
       method: 'PUT',
       headers: this._headers
     })
-    .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
-    .catch(err => console.log(err))
+    .then(this._checkResponse)
   }
 
   removeLike(id) {
@@ -45,8 +45,7 @@ class Api {
       method: 'DELETE',
       headers: this._headers
     })
-    .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
-    .catch(err => console.log(err))
+    .then(this._checkResponse)
   }
 
   deleteCard(id) {
@@ -64,8 +63,7 @@ class Api {
         avatar
       })
     })
-    .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
-    .catch(err => console.log(err));
+    .then(this._checkResponse)
   }
 
   editProfileInfo({name,about}) {
@@ -77,8 +75,7 @@ class Api {
         about
       })
     })
-    .then (res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
-    .catch(err => console.log(err));
+    .then(this._checkResponse)
   }
 }
 

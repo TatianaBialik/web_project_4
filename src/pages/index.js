@@ -21,15 +21,20 @@ import { api } from '../components/Api.js';
 
 /* Forms validation */
 
-const editProfileFormValidator = new FormValidator(configObject,editProfileForm);
-const addFormValidator = new FormValidator(configObject, addCardForm);
-const changeAvatarFormValidator = new FormValidator(configObject,changeAvatarForm);
+const formValidators = {};
 
-(function setFormsValidator() {
-  editProfileFormValidator.enableValidation();
-  addFormValidator.enableValidation();
-  changeAvatarFormValidator.enableValidation();
-})();
+const enableValidation = (config) => {
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(config, formElement);
+    const formName = formElement.getAttribute('name');
+
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  })
+};
+
+enableValidation(configObject);
 
 /* Card handlers and rendering */
 
@@ -42,12 +47,14 @@ const handleLikeButton = (card) => {
     api.removeLike(card.getId())
       .then(res => {
         card.setLikes(res.likes);
-      }) 
+      })
+      .catch(err => console.log(err))
   } else {
     api.addLike(card.getId())
       .then(res => {
         card.setLikes(res.likes);
       })
+      .catch(err => console.log(err))
   }
 }
 
@@ -60,7 +67,7 @@ const handleDeleteCardButton = (card) => {
 const renderCard = (item) => {
   const card = new Card(
     item, 
-    userId,
+    userInfo.getId(),
     item.owner._id,
     '#card', 
     () => handleCardClick(item), 
@@ -76,100 +83,93 @@ const renderCard = (item) => {
 const cardsSection = new Section({
   renderer: (item) => {
     cardsSection.addItem(renderCard(item));
-    
   }
 }, '.gallery__list');
 
-let userId;
-
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([userData, cards]) => {
-    userId = userData._id;
     userInfo.setUserInfo(userData);
-    avatar.src = userData.avatar;
 
     cardsSection.renderCards(cards);
   })
+  .catch(err => console.log(err))
 
 /* Creating classes instances and setting event listeners */
 
-const userInfo = new UserInfo('.profile__name', '.profile__about');
+const userInfo = new UserInfo('.profile__name', '.profile__about', '.profile__avatar');
 
 const imagePopup = new PopupWithImage('.popup_type_picture');
 
-function renderLoading(button) {
-  const buttonText = button.textContent;
-  button.textContent = 'Saving...';
-  return buttonText;
-}
-
 const handleEditSubmission = (popup) => {
-  const formButton = editProfileForm.querySelector('.form__submit-button')
-  const formButtonText = renderLoading(formButton);
+  popup.renderLoading(true);
 
   api.editProfileInfo(popup.getInputValues())
     .then(res => {
       userInfo.setUserInfo(res);
-    })
-    .finally(() => {
       popup.close();
-      formButton.textContent = formButtonText
+    })
+    .catch(err => console.log(err))
+    .finally(() => {
+      popup.renderLoading(false);
     })
 }
 
 const editFormPopup = new PopupWithForm(
   '.popup_type_edit', 
   () => handleEditSubmission(editFormPopup), 
-  editProfileFormValidator);
+  formValidators['edit-info-form']);
 editFormPopup.setEventListeners();
 
 const handleAddCardSubmission = (popup) => {
   const newCardValues = popup.getInputValues();
   newCardValues.alt = `Here was a beautiful picture of ${newCardValues.name}`;
 
-  const formButton = addCardForm.querySelector('.form__submit-button')
-  const formButtonText = renderLoading(formButton);
+  popup.renderLoading(true);
 
   api.addCard(newCardValues)
     .then(res => {
       cardsSection.addNewItem(renderCard(res))
-    })
-    .finally(() => {
       popup.close();
-      formButton.textContent = formButtonText;
+    })
+    .catch(err => console.log(err))
+    .finally(() => {
+      popup.renderLoading(false);
     })
 }
 
 const addCardPopup = new PopupWithForm(
   '.popup_type_add-card', 
   () => handleAddCardSubmission(addCardPopup), 
-  addFormValidator);
+  formValidators['add-form']);
 addCardPopup.setEventListeners();
 
 const handleChangeAvatarSubmission = (popup) => {
-  const formButton = changeAvatarForm.querySelector('.form__submit-button')
-  const formButtonText = renderLoading(formButton);
+  popup.renderLoading(true);
 
   api.editProfilePhoto(popup.getInputValues().avatar)
     .then(res => {
-      avatar.src = res.avatar;
-    })
-    .finally(() => {
+      userInfo.setAvatar(res.avatar);
       popup.close();
-      formButton.textContent = formButtonText;
+    })
+    .catch(err => console.log(err))
+    .finally(() => {
+      popup.renderLoading(false);
     })
 }
 
 const changeAvatarPopup = new PopupWithForm(
   '.popup_type_edit-avatar', 
   () => handleChangeAvatarSubmission(changeAvatarPopup), 
-  changeAvatarFormValidator);
+  formValidators['edit-avatar-form']);
 changeAvatarPopup.setEventListeners();
 
 const handleDeleteCardSubmission = (popup) => {
   api.deleteCard(cardToDelete.getId())
-    .finally(popup.close());
-  cardToDelete.deleteCard();
+  .then(() => {
+    cardToDelete.deleteCard();
+    popup.close();
+  })
+  .catch(err => console.log(err))
 }
 
 const deleteCardSubmissionPopup = new PopupWithConfirmation(
@@ -179,20 +179,14 @@ deleteCardSubmissionPopup.setEventListeners();
 
 /* Event listeners for opening modal windows */
 
-const fillProfileInfoForm = () => {
-  const info = userInfo.getUserInfo();
-  popupInputName.value = info.name;
-  popupInputInfo.value = info.job;
-}
-
 (function setModalsEventListeners() {
   profileEditButton.addEventListener('click', () => {
-    fillProfileInfoForm();
+    editFormPopup.setInputValues(userInfo.getUserInfo());
     editFormPopup.open()
   });
 
   addCardButton.addEventListener('click', () => addCardPopup.open());
 
-  avatar.addEventListener('click', () => changeAvatarPopup.open());
+  userInfo.getAvatar().addEventListener('click', () => changeAvatarPopup.open());
 })();
 

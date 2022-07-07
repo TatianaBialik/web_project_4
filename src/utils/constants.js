@@ -62,7 +62,7 @@ const changeAvatarForm = document.querySelector('.form_type_edit-avatar');
 
 /* User profile */
 
-const avatar = document.querySelector('.profile__avatar');
+// const avatar = document.querySelector('.profile__avatar');
 
 
 export { 
@@ -74,6 +74,6 @@ export {
         popupInputInfo,
         addCardButton,
         addCardForm,
-        avatar,
+        // avatar,
         changeAvatarForm
        };
